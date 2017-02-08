@@ -1,0 +1,9 @@
+<iframe
+  src="http://localhost:4200/tests"
+  onload={{action 'frameLoaded'}} >
+</iframe>
+<ul>
+  {{#each messages as |m|}}
+    <li>{{m}}</li>
+  {{/each}}
+</ul>
