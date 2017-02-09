@@ -8,5 +8,18 @@ moduleFor('service:teststatus', 'Unit | Service | teststatus', {
 // Replace this with your real tests.
 test('it exists', function(assert) {
   let service = this.subject();
-  assert.ok(service);
+  let done = assert.async();
+  setTimeout(function() {
+    done();
+  }, 5000);
+  assert.ok(service, 'Service is not falsy');
+  assert.equal(3, 3, 'Three is three');
+  assert.ok(false, 'Oops!!!!');
+});
+
+
+test('another thing', function(assert) {
+  let service = this.subject();
+  assert.ok(service, 'Service is not falsy');
+  assert.equal(3, 3, 'Three is three');
 });

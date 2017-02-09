@@ -1,0 +1,100 @@
+.qunit-events-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 270px;
+    padding: 10px;
+    background-color: #666;
+    border-right: 1px solid #aaa;
+    margin-right: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-header {
+    height: 40px;
+    color: white;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-container { 
+    top: 40px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content {
+    width: 260px;
+    padding: 5px;
+    overflow-x: hidden;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules {
+    list-style: none;
+    padding-left: 0;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module {
+    margin: 5px 0;
+    padding: 2px 2px 2px 5px;
+    border-left: 8px solid transparent;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-name {
+    margin: 0;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-passing {
+    border-left-color: lightgreen;
+    background-color: rgb(230,255, 230);
+    border-right-color: lightgreen;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests {
+    list-style: none;
+    padding-left: 0;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-passing .module-tests {
+    display: none;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test-name {
+    margin: 0;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-failing {
+    border-left-color: red;
+    background-color: rgb(255, 230, 230);
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .module-test-name{
+    display: inline-block;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test:before {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-failing:before {
+    content: '️⛔️';
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-unknown:before {
+    content: '️⏳';
+}
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-passing:before {
+    content: '️✅';
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-unknown {
+    border-left-color: yellow;
+    background-color: lightyellow;
+}
+
+body {
+    display: inline-block;
+    margin-left: 300px;
+}
