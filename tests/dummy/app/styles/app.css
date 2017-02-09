@@ -1,14 +1,40 @@
 .qunit-events-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 270px;
-    padding: 10px;
-    background-color: #666;
-    border-right: 1px solid #aaa;
-    margin-right: 10px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: fixed;
+  left: 0;
+  transition: left 0.3s ease-in-out;
+  top: 0;
+  height: 100%;
+  width: 270px;
+  padding: 10px;
+  background-color: #666;
+  border-right: 1px solid #aaa;
+  margin-right: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.qunit-events-sidebar:after {
+  display: inline-block;
+  position: absolute;
+  right: -29px;
+  top: 0;
+  background: green;
+  color: white;
+  padding: 10px;
+  content: 'X';
+}
+
+.qunit-sidebar-open .qunit-events-sidebar {
+  left: 0px;
+}
+
+ body {
+   margin-left: 0;
+   transition: margin-left 0.3s ease-in-out;
+ }
+
+body.qunit-sidebar-open {
+  display: inline-block;
+  margin-left: 300px;
 }
 
 .qunit-events-sidebar .qunit-events-sidebar-header {
@@ -16,9 +42,14 @@
     color: white;
 }
 
+.qunit-events-sidebar .qunit-events-sidebar-header h3 {
+  margin: 0;
+}
+
 .qunit-events-sidebar .qunit-events-sidebar-container { 
     top: 40px;
-    height: 100%;
+    bottom: 0;
+    position: fixed;
     overflow: scroll;
 }
 
@@ -51,9 +82,11 @@
     white-space: nowrap;
     overflow: hidden;
 }
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions,
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests {
     list-style: none;
     padding-left: 0;
+    margin-left: 15px;
 }
 
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-passing .module-tests {
@@ -73,18 +106,26 @@
     display: inline-block;
 }
 
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions .test-assertion:before,
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test:before {
     margin-right: 10px;
     display: inline-block;
 }
 
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions {
+  list-style: none;
+}
+
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions .test-assertion.status-failing:before, 
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-failing:before {
     content: '️⛔️';
 }
 
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions .test-assertion.status-unknown:before,
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-unknown:before {
     content: '️⏳';
 }
+.qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test .test-assertions .test-assertion.status-passing:before,
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module .module-tests .module-test.status-passing:before {
     content: '️✅';
 }
@@ -92,9 +133,4 @@
 .qunit-events-sidebar .qunit-events-sidebar-content ul.qunit-events-test-modules li.test-module.status-unknown {
     border-left-color: yellow;
     background-color: lightyellow;
-}
-
-body {
-    display: inline-block;
-    margin-left: 300px;
 }

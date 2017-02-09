@@ -26,7 +26,7 @@
   w.addEventListener('load', doSetup);
 
   function defaultTestUrl() {
-    var url = new URL(window.location.href);
+    var url = new URL(w.location.href);
     url.pathname = '/tests';
     return url.href;
   }
@@ -67,8 +67,21 @@
       this.sidebar = sidebar;
     },
 
-    addOrUpdateTestAssertion: function() {
-
+    addOrUpdateTestAssertion: function(moduleInfo, testInfo, assertionInfo, selectors, parent) {
+      var assertionSelector = selectors.test + ' .test-assertions .test-assertion-' + assertionInfo.id;
+      var assertionElem = document.querySelector(assertionSelector);
+      if (!assertionElem) {
+        assertionElem = document.createElement('li');
+        assertionElem.className = 'test-assertion test-assertion-' + assertionInfo.id;
+        parent.appendChild(assertionElem);
+      }
+      if (assertionInfo.result) {
+        assertionElem.classList.add('status-passing');
+        assertionElem.innerText = assertionInfo.message;
+      } else {
+        assertionElem.classList.add('status-failing');
+        assertionElem.innerHTML = '<code>' + assertionInfo.message.split('\n').join('\n  ') + '</code>';
+      }
     },
 
     addOrUpdateModuleTest: function(moduleInfo, testInfo, selectors, parent) {
@@ -95,8 +108,12 @@
       }
       if (typeof testInfo.assertions === 'object' && testInfo.assertions.length > 0) {
         testElem.classList.add('has-assertions');
+        var assertionList = document.querySelector(testSelector + ' .test-assertions');
         for (var i = 0; i < testInfo.assertions.length; i++) {
-          // TODO
+          this.addOrUpdateTestAssertion(moduleInfo, testInfo, Object.assign({ id: i }, testInfo.assertions[i]), {
+            module: selectors.module,
+            test: testSelector
+          }, assertionList);
         }
       } else {
         testElem.classList.add('no-assertions');
@@ -139,7 +156,7 @@
       }
     },
     setupTestFrame: function(container) {
-      this.containerElement = container || window.document.body;
+      this.containerElement = container || w.document.body;
       var iframe = document.createElement('iframe');
       iframe.src = this.client._testUrl;
       iframe.onload = this.client._onFrameLoaded;
@@ -151,7 +168,6 @@
     }
   };
 
-
   // ==== Client ==== //
 
   function QUnitEventsClient(options) {
@@ -162,7 +178,7 @@
 
     function setupTestFrameWindow(fw) {
       var testOrigin = new URL(this._testUrl).origin;
-      var appOrigin = new URL(window.location.href).origin;
+      var appOrigin = new URL(w.location.href).origin;
       fw.postMessage({
         eventName: 'setup',
         instanceId: this._id,

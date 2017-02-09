@@ -8,7 +8,7 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.qunitEventsClient = new QUnitEventsClient({
-      testUrl: 'http://localhost:4200/tests'
+      testUrl: 'http://localhost:4200/tests?nolint'
     });
   },
   didRender() {
